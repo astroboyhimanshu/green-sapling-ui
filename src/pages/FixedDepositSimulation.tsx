@@ -171,10 +171,10 @@ export default function FixedDepositSimulation() {
             };
           }
 
-          // Check for emergency every 24 months (2 years)
+          // Check for emergency every 12 months (1 year)
           if (
             newTotalMonthsElapsed > 0 &&
-            newTotalMonthsElapsed % 24 === 0 &&
+            newTotalMonthsElapsed % 12 === 0 &&
             !showEmergency
           ) {
             const randomEmergency =
@@ -194,7 +194,7 @@ export default function FixedDepositSimulation() {
             fixedDeposits: updatedFDs,
           };
         });
-      }, 2000);
+      }, 833); // ~833ms per month = 10 seconds per year
     }
     return () => clearInterval(interval);
   }, [isRunning, showEmergency, emergencies]);

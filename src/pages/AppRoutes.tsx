@@ -15,7 +15,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/select-role" element={<RoleSelectionPage />} />
-      <Route path="/student" element={<StudentDashboard />} />
+      <Route path="/student/dashboard" element={<StudentDashboard />} />
       <Route path="/student/course/:courseId" element={<CourseDetail />} />
       <Route
         path="/student/course/:courseId/setup"
@@ -37,7 +37,7 @@ const AppRoutes = () => {
         path="/student/course/:courseId/simulation/fixed-deposit"
         element={<FixedDepositSimulation />}
       />
-      <Route path="/educator" element={<EducatorDashboard />} />
+      <Route path="/educator/dashboard" element={<EducatorDashboard />} />
       <Route path="/educator/course/:courseId" element={<CourseDetail />} />
       <Route
         path="/educator/course/:courseId/setup"

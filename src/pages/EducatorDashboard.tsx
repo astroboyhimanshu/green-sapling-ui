@@ -1,71 +1,438 @@
-import EducatorHeader from "../components/EducatorHeader";
-import CourseCard from "../components/CourseCard";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Container,
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  AppBar,
+  Toolbar,
+  Avatar,
+} from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
 
 export default function EducatorDashboard() {
-  // Same course data as students - educators get access to the same content
+  const navigate = useNavigate();
+
   const courses = [
     {
       id: "financial-foundations",
       title: "Financial Foundations",
-      description:
-        "Master the fundamentals of money management, budgeting, and smart financial decisions. Perfect for beginners starting their financial literacy journey.",
+      description: "Master the fundamentals of money management",
       icon: "💰",
-      difficulty: "Beginner" as const,
+      difficulty: "Beginner",
       lessons: 12,
-      isNew: true,
       progress: 0,
-      color: "bg-gradient-to-br from-green-400 to-emerald-500",
+      color: "#2d6a4f",
+      isNew: true,
+      isLocked: false,
+    },
+    {
+      id: "investing-101",
+      title: "Investing 101",
+      description: "Stocks, bonds, and portfolio building",
+      icon: "📈",
+      difficulty: "Intermediate",
+      lessons: 10,
+      progress: 0,
+      color: "#1e5f74",
+      isNew: false,
+      isLocked: true,
+    },
+    {
+      id: "smart-spending",
+      title: "Smart Spending",
+      description: "Budgeting and smart financial decisions",
+      icon: "🛒",
+      difficulty: "Beginner",
+      lessons: 8,
+      progress: 0,
+      color: "#7b2d8b",
+      isNew: false,
+      isLocked: true,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <EducatorHeader educatorName="Teacher" />
+    <>
+      {/* Fixed Navbar */}
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: "rgba(248,253,245,0.85)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, md: 5 } }}>
+          {/* Logo */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/")}
+          >
+            <Typography sx={{ fontSize: "1.75rem" }}>🌱</Typography>
+            <Typography
+              sx={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                color: "#1a3a2a",
+              }}
+            >
+              Green Sapling
+            </Typography>
+          </Box>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Course Library
-          </h1>
-          <p className="text-gray-600">
-            Explore and teach financial literacy courses to your students
-          </p>
-        </div>
+          {/* Nav Links */}
+          <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 0.5 }}>
+            <Button
+              onClick={() => navigate("/educator/dashboard")}
+              sx={{
+                color: "#2d6a4f",
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                px: 2,
+                py: 0.75,
+                borderRadius: "50px",
+                textTransform: "none",
+                bgcolor: "rgba(45,106,79,0.08)",
+              }}
+            >
+              Courses
+            </Button>
+            <Button
+              sx={{
+                color: "#1c1c1e",
+                fontSize: "0.875rem",
+                fontWeight: 400,
+                px: 2,
+                py: 0.75,
+                borderRadius: "50px",
+                textTransform: "none",
+                "&:hover": {
+                  bgcolor: "rgba(45,106,79,0.08)",
+                  color: "#2d6a4f",
+                },
+              }}
+            >
+              Progress
+            </Button>
+            <Button
+              sx={{
+                color: "#1c1c1e",
+                fontSize: "0.875rem",
+                fontWeight: 400,
+                px: 2,
+                py: 0.75,
+                borderRadius: "50px",
+                textTransform: "none",
+                "&:hover": {
+                  bgcolor: "rgba(45,106,79,0.08)",
+                  color: "#2d6a4f",
+                },
+              }}
+            >
+              Achievements
+            </Button>
+          </Box>
 
-        <div className="flex gap-10 py-8">
-          <div className="flex w-24 h-24">
-            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-4xl">
+          {/* User Profile */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+            <Typography
+              sx={{
+                fontSize: "0.8125rem",
+                color: "#6b7280",
+                display: { xs: "none", sm: "block" },
+              }}
+            >
+              Welcome back,
+            </Typography>
+            <Avatar
+              sx={{
+                width: 36,
+                height: 36,
+                bgcolor: "#2d6a4f",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+              }}
+            >
+              T
+            </Avatar>
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      {/* Main Content */}
+      <Box sx={{ bgcolor: "#f9fafb", minHeight: "100vh", pt: 8 }}>
+        <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
+          {/* Header */}
+          <Box sx={{ mb: 5 }}>
+            <Typography
+              variant="h3"
+              sx={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: { xs: "2rem", md: "2.25rem" },
+                fontWeight: 700,
+                color: "#1a3a2a",
+                letterSpacing: "-0.01em",
+                mb: 0.75,
+              }}
+            >
+              Learning Paths
+            </Typography>
+            <Typography sx={{ color: "#6b7280", fontSize: "0.9375rem" }}>
+              Step-by-step paths to financial mastery
+            </Typography>
+          </Box>
+
+          {/* Path Header */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              mb: 3.5,
+            }}
+          >
+            <Box
+              sx={{
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                bgcolor: "rgba(45,106,79,0.1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.75rem",
+              }}
+            >
               🌱
-            </div>
-          </div>
-          <div className="flex items-center justify-center font-bold text-3xl">
-            Foundation of Investing
-          </div>
-          <div className="flex items-center justify-center text-xl font-medium">
-            Teach students how to manage their money
-          </div>
-        </div>
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: "'Fraunces', serif",
+                  fontSize: "1.375rem",
+                  fontWeight: 600,
+                  color: "#1a3a2a",
+                }}
+              >
+                Foundation of Investing
+              </Typography>
+              <Typography
+                sx={{ fontSize: "0.8125rem", color: "#6b7280", mt: 0.25 }}
+              >
+                Learn how to manage your money
+              </Typography>
+            </Box>
+          </Box>
 
-        {/* Courses Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {courses.map((course) => (
-            <CourseCard
-              key={course.id}
-              id={course.id}
-              title={course.title}
-              description={course.description}
-              icon={course.icon}
-              difficulty={course.difficulty}
-              lessons={course.lessons}
-              isNew={course.isNew}
-              progress={course.progress}
-              color={course.color}
-              basePath="/educator"
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+          {/* Courses Grid */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+              },
+              gap: 3,
+            }}
+          >
+            {courses.map((course) => (
+              <Card
+                key={course.id}
+                elevation={0}
+                sx={{
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  cursor: course.isLocked ? "not-allowed" : "pointer",
+                  opacity: course.isLocked ? 0.6 : 1,
+                  transition: "all 0.25s ease",
+                  "&:hover": course.isLocked
+                    ? {}
+                    : {
+                        transform: "translateY(-4px)",
+                        boxShadow: "0 20px 48px rgba(0,0,0,0.08)",
+                      },
+                }}
+                onClick={() =>
+                  !course.isLocked && navigate(`/educator/course/${course.id}`)
+                }
+              >
+                {/* Card Header */}
+                <Box
+                  sx={{
+                    height: 160,
+                    background: course.isLocked
+                      ? "linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)"
+                      : course.color,
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    overflow: "hidden",
+                  }}
+                >
+                  {course.isNew && !course.isLocked && (
+                    <Chip
+                      label="NEW"
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        top: 14,
+                        left: 14,
+                        bgcolor: "#d4a017",
+                        color: "white",
+                        fontWeight: 600,
+                        fontSize: "0.6875rem",
+                        letterSpacing: "0.05em",
+                        height: 24,
+                      }}
+                    />
+                  )}
+                  {/* Decorative orbs */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: -20,
+                      right: -20,
+                      width: 120,
+                      height: 120,
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.08)",
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: -30,
+                      left: -20,
+                      width: 100,
+                      height: 100,
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.06)",
+                    }}
+                  />
+                  {course.isLocked ? (
+                    <LockIcon
+                      sx={{
+                        fontSize: 52,
+                        color: "rgba(255,255,255,0.7)",
+                        position: "relative",
+                      }}
+                    />
+                  ) : (
+                    <Typography
+                      sx={{
+                        fontSize: "3.25rem",
+                        position: "relative",
+                        animation: "float 4s ease-in-out infinite",
+                        "@keyframes float": {
+                          "0%, 100%": { transform: "translateY(0px)" },
+                          "50%": { transform: "translateY(-8px)" },
+                        },
+                      }}
+                    >
+                      {course.icon}
+                    </Typography>
+                  )}
+                </Box>
+
+                {/* Card Body */}
+                <CardContent sx={{ p: 2.75 }}>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Fraunces', serif",
+                      fontSize: "1.1875rem",
+                      fontWeight: 600,
+                      color: "#1a3a2a",
+                      mb: 0.75,
+                    }}
+                  >
+                    {course.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "0.8125rem",
+                      color: "#6b7280",
+                      mb: 2,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {course.description}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      mb: 2.25,
+                    }}
+                  >
+                    <Chip
+                      label={course.difficulty}
+                      size="small"
+                      sx={{
+                        bgcolor: "#dcfce7",
+                        color: "#15803d",
+                        fontWeight: 500,
+                        fontSize: "0.75rem",
+                        height: 24,
+                      }}
+                    />
+                    <Typography
+                      sx={{ fontSize: "0.8125rem", color: "#6b7280" }}
+                    >
+                      {course.lessons} lessons
+                    </Typography>
+                  </Box>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    disabled={course.isLocked}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!course.isLocked) {
+                        navigate(`/educator/course/${course.id}`);
+                      }
+                    }}
+                    sx={{
+                      py: 1.5,
+                      borderRadius: "50px",
+                      textTransform: "none",
+                      fontSize: "0.875rem",
+                      fontWeight: 500,
+                      borderColor: course.isLocked
+                        ? "rgba(0,0,0,0.12)"
+                        : "#2d6a4f",
+                      color: course.isLocked ? "#9ca3af" : "#2d6a4f",
+                      borderWidth: 1.5,
+                      "&:hover": course.isLocked
+                        ? {}
+                        : {
+                            bgcolor: "#2d6a4f",
+                            color: "white",
+                            borderColor: "#2d6a4f",
+                          },
+                    }}
+                  >
+                    {course.isLocked ? "Locked" : "Start Course"}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        </Container>
+      </Box>
+    </>
   );
 }

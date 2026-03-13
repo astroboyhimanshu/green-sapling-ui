@@ -122,10 +122,10 @@ export default function SavingsSimulation() {
             };
           }
 
-          // Check for emergency every 24 months (2 years)
+          // Check for emergency every 12 months (1 year)
           if (
             newTotalMonthsElapsed > 0 &&
-            newTotalMonthsElapsed % 24 === 0 &&
+            newTotalMonthsElapsed % 12 === 0 &&
             !showEmergency
           ) {
             const randomEmergency =
@@ -144,7 +144,7 @@ export default function SavingsSimulation() {
             totalMonthsElapsed: newTotalMonthsElapsed,
           };
         });
-      }, 2000); // 2 seconds = 1 month
+      }, 833); // ~833ms per month = 10 seconds per year
     }
     return () => clearInterval(interval);
   }, [isRunning, showEmergency, emergencies]);
@@ -358,7 +358,7 @@ export default function SavingsSimulation() {
         </div>
       )}
 
-      <div className="flex h-screen pt-16">
+      <div className="flex h-screen">
         {/* Left Side Panel */}
         <div className="w-1/3 bg-green-900/50 p-6 text-white">
           {/* Timer */}
@@ -373,8 +373,7 @@ export default function SavingsSimulation() {
               ></div>
             </div>
             <div className="text-sm mt-2 text-green-200">
-              {simulation.yearsLeft} years, {simulation.monthsLeft} months until
-              18
+              {simulation.yearsLeft} years, {simulation.monthsLeft} left
             </div>
           </div>
 
