@@ -16,7 +16,6 @@ interface CourseCardProps {
 export default function CourseCard({
   id,
   title,
-  description,
   icon,
   progress = 0,
   difficulty,
