@@ -740,14 +740,14 @@ export default function FixedDepositSimulation() {
                       {
                         label: "Security",
                         value: cfoScores.securityScore,
-                        max: 5,
+                        max: 3,
                         color: "bg-blue-500",
                         icon: "🛡️",
                       },
                       {
                         label: "Liquidity",
                         value: cfoScores.liquidityScore,
-                        max: 5,
+                        max: 3,
                         color: "bg-green-500",
                         icon: "💧",
                       },
@@ -910,13 +910,13 @@ export default function FixedDepositSimulation() {
                 {
                   label: "Security",
                   value: cfoScores.securityScore,
-                  max: 5,
+                  max: 3,
                   color: "bg-blue-400",
                 },
                 {
                   label: "Liquidity",
                   value: cfoScores.liquidityScore,
-                  max: 5,
+                  max: 3,
                   color: "bg-green-400",
                 },
                 {
@@ -1098,7 +1098,7 @@ export default function FixedDepositSimulation() {
                             </Button>
                           ) : (
                             <div className="text-orange-600 text-xs mt-1">
-                              {fd.remainingMonths}m left
+                              {fd.remainingMonths}s left
                             </div>
                           )}
                           {fd.isMatured && (

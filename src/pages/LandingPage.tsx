@@ -289,30 +289,6 @@ export default function LandingPage() {
               >
                 Get Started Free →
               </Button>
-              <Button
-                variant="outlined"
-                size="large"
-                sx={{
-                  fontSize: { xs: "0.95rem", md: "1rem" },
-                  px: { xs: 4, md: 5 },
-                  py: { xs: 1.5, md: 2 },
-                  borderRadius: "50px",
-                  textTransform: "none",
-                  fontWeight: 500,
-                  color: "#2d6a4f",
-                  borderColor: "#2d6a4f",
-                  borderWidth: 1.5,
-                  "&:hover": {
-                    bgcolor: "#2d6a4f",
-                    color: "white",
-                    borderColor: "#2d6a4f",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.2s ease",
-                }}
-              >
-                Watch Demo
-              </Button>
             </Box>
 
             {/* Floating stats */}
