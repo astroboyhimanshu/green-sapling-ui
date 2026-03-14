@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import StudentHeader from "../components/StudentHeader";
 import EducatorHeader from "../components/EducatorHeader";
 import Button from "../components/Button";
+import XPToast from "../components/XPToast";
 
 interface SimulationState {
   savingsBalance: number;
@@ -43,6 +44,9 @@ export default function SavingsSimulation() {
     null,
   );
   const [showCompletion, setShowCompletion] = useState(false);
+  const [xpEvent, setXpEvent] = useState<{ label: string; xp: number } | null>(
+    null,
+  );
 
   // Track interest earned within the current year
   const yearlyInterestRef = useRef(0);
@@ -146,6 +150,15 @@ export default function SavingsSimulation() {
                 { icon: false },
               );
               yearlyInterestRef.current = 0;
+              // Award XP (deferred so state update doesn't conflict)
+              setTimeout(
+                () =>
+                  setXpEvent({
+                    label: `Year ${year} complete — Savings Simulation`,
+                    xp: 10,
+                  }),
+                100,
+              );
             }
 
             const randomEmergency =
@@ -241,6 +254,15 @@ export default function SavingsSimulation() {
   return (
     <div className="min-h-screen bg-linear-to-br from-green-800 via-green-700 to-green-900">
       {isEducator ? <EducatorHeader /> : <StudentHeader />}
+
+      {/* XP Toast */}
+      {xpEvent && (
+        <XPToast
+          label={xpEvent.label}
+          xp={xpEvent.xp}
+          onDone={() => setXpEvent(null)}
+        />
+      )}
 
       {/* Emergency Modal */}
       {showEmergency && currentEmergency && (

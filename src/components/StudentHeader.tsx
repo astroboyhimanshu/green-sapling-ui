@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getTotalXP } from "../utils/xp";
 
 interface StudentHeaderProps {
   studentName?: string;
@@ -8,6 +9,24 @@ export default function StudentHeader({
   studentName = "Student",
 }: StudentHeaderProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const totalXP = getTotalXP();
+
+  const navBtn = (label: string, path: string) => {
+    const active = location.pathname === path;
+    return (
+      <button
+        onClick={() => navigate(path)}
+        className={`font-medium transition-colors cursor-pointer px-3 py-2 rounded-2xl ${
+          active
+            ? "bg-green-100 text-green-800"
+            : "text-gray-700 hover:text-green-700 hover:bg-green-50"
+        }`}
+      >
+        {label}
+      </button>
+    );
+  };
 
   return (
     <div className="bg-white shadow-sm border-b border-gray-100">
@@ -26,23 +45,24 @@ export default function StudentHeader({
             </div>
 
             <nav className="flex space-x-6">
-              <button
-                onClick={() => navigate("/")}
-                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-2xl hover:bg-green-50"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => navigate("/student/dashboard")}
-                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-2xl hover:bg-green-50"
-              >
-                Courses
-              </button>
+              {navBtn("Home", "/")}
+              {navBtn("Courses", "/student/dashboard")}
+              {navBtn("Progress", "/student/progress")}
             </nav>
           </div>
 
           {/* User Profile */}
           <div className="flex items-center space-x-3">
+            {/* XP badge */}
+            <button
+              onClick={() => navigate("/student/progress")}
+              className="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-full px-3 py-1.5 hover:bg-green-100 transition-colors"
+            >
+              <span className="text-sm">⭐</span>
+              <span className="text-sm font-bold text-green-700">
+                {totalXP} XP
+              </span>
+            </button>
             <div className="hidden sm:block text-right">
               <p className="text-sm text-gray-600">Welcome,</p>
               <p className="font-semibold text-gray-800">{studentName}</p>

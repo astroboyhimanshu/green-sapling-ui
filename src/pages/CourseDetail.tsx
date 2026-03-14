@@ -23,10 +23,19 @@ export default function CourseDetail() {
   const isEducator = location.pathname.startsWith("/educator");
   const basePath = isEducator ? "/educator" : "/student";
 
-  // Level 2 unlocks when navigated here with completedLevel >= 1
-  const completedLevel: number =
+  const stateLevel: number =
     (location.state as { completedLevel?: number })?.completedLevel ?? 0;
+
+  // Persist the highest completed level in localStorage so it survives re-navigation
+  const storageKey = `completedLevel_${courseId}`;
+  const storedLevel = parseInt(localStorage.getItem(storageKey) ?? "0", 10);
+  const completedLevel = Math.max(stateLevel, storedLevel);
+  if (stateLevel > storedLevel) {
+    localStorage.setItem(storageKey, String(stateLevel));
+  }
+
   const level2Unlocked = completedLevel >= 1;
+  const level3Unlocked = completedLevel >= 2;
 
   const courseData = {
     "financial-foundations": {
@@ -78,6 +87,18 @@ export default function CourseDetail() {
       setupPath: `${basePath}/course/${courseId}/lesson/2`,
       lessonPath: `${basePath}/course/${courseId}/lesson/2`,
     },
+    {
+      number: 3,
+      label: "LEVEL 3",
+      title: "Final Quiz",
+      description:
+        "Test your knowledge of savings accounts and fixed deposits with a fun interactive quiz!",
+      color: "border-purple-200",
+      borderColor: "border-purple-400",
+      imageSrc: "/sapling1.png",
+      setupPath: `${basePath}/course/${courseId}/quiz`,
+      lessonPath: `${basePath}/course/${courseId}/quiz`,
+    },
   ];
 
   return (
@@ -103,7 +124,7 @@ export default function CourseDetail() {
 
             <div className="flex items-center space-x-2 text-gray-700">
               <span className="text-lg">📚</span>
-              <span className="font-medium">2 Levels</span>
+              <span className="font-medium">3 Levels</span>
             </div>
           </div>
         </div>
@@ -111,7 +132,10 @@ export default function CourseDetail() {
         {/* Right — levels list */}
         <div className="flex-1 flex flex-col gap-8">
           {levels.map((level) => {
-            const isUnlocked = level.number === 1 || level2Unlocked;
+            const isUnlocked =
+              level.number === 1 ||
+              (level.number === 2 && level2Unlocked) ||
+              (level.number === 3 && level3Unlocked);
             return (
               <div
                 key={level.number}
@@ -140,6 +164,12 @@ export default function CourseDetail() {
                   {isUnlocked && level.number === 1 && completedLevel >= 1 && (
                     <div className="text-4xl ml-4">✅</div>
                   )}
+                  {isUnlocked && level.number === 2 && completedLevel >= 2 && (
+                    <div className="text-4xl ml-4">✅</div>
+                  )}
+                  {isUnlocked && level.number === 3 && completedLevel >= 3 && (
+                    <div className="text-4xl ml-4">✅</div>
+                  )}
                 </div>
 
                 {/* Level image */}
@@ -164,7 +194,9 @@ export default function CourseDetail() {
                     <span className="text-sm text-gray-500">
                       {isUnlocked
                         ? "Ready to start"
-                        : "Complete Level 1 to unlock"}
+                        : level.number === 2
+                          ? "Complete Level 1 to unlock"
+                          : "Complete Level 2 to unlock"}
                     </span>
                   </div>
                   <button
@@ -178,7 +210,13 @@ export default function CourseDetail() {
                   >
                     {level.number === 1 && completedLevel >= 1
                       ? "Replay Lesson"
-                      : "Start Lesson"}
+                      : level.number === 2 && completedLevel >= 2
+                        ? "Replay Lesson"
+                        : level.number === 3 && completedLevel >= 3
+                          ? "Retake Quiz"
+                          : level.number === 3
+                            ? "Start Quiz"
+                            : "Start Lesson"}
                   </button>
                 </div>
               </div>
