@@ -254,6 +254,121 @@ export default function FixedDepositSimulation() {
         },
       ],
     },
+    {
+      type: "School Trip",
+      cost: 800,
+      icon: "🚌",
+      severity: "low",
+      description: "A school trip to a nearby museum costs ₹800!",
+      finalPaymentFromSavings: false,
+      questions: [
+        {
+          question:
+            "A school trip to a nearby museum costs ₹800. It's a small, fun expense. Where do you reach first?",
+          options: [
+            { label: "My Pocket Cash.", value: "A" },
+            { label: "My Savings Account.", value: "B" },
+          ],
+          correctAnswer: "A",
+          explanation:
+            "Pocket Cash is exactly for small, everyday expenses like this. No need to touch your Savings Account for a small outing!",
+        },
+        {
+          question:
+            "For a small ₹800 payment, is it worth the time and effort to go to a bank or ATM, or is the cash in your hand better?",
+          options: [
+            {
+              label: "Pocket Cash — fast and convenient for small things.",
+              value: "A",
+            },
+            {
+              label: "Savings Account — worth the trip to the bank.",
+              value: "B",
+            },
+          ],
+          correctAnswer: "A",
+          explanation:
+            "For small amounts, Pocket Cash saves you time and hassle. Reserve the bank trip for when it really matters.",
+        },
+        {
+          question:
+            "If you use Pocket Cash for the trip, your Savings Account keeps earning interest on its full balance. Which choice keeps your 'Tree' growing the fastest?",
+          options: [
+            {
+              label: "Pocket Cash — spend the small stuff, save the big stuff.",
+              value: "A",
+            },
+            {
+              label: "Savings Account — the bank should pay for everything.",
+              value: "B",
+            },
+          ],
+          correctAnswer: "A",
+          explanation:
+            "Exactly! Every rupee left in your Savings Account keeps growing. Use Pocket Cash for small joys and let your savings compound undisturbed.",
+        },
+      ],
+    },
+    {
+      type: "Birthday Gift",
+      cost: 500,
+      icon: "🎁",
+      severity: "low",
+      description:
+        "Your best friend's birthday is tomorrow! You need ₹500 for a gift.",
+      finalPaymentFromSavings: false,
+      questions: [
+        {
+          question:
+            "Your best friend's birthday is tomorrow. You need ₹500 for a gift. What's the best way to pay?",
+          options: [
+            {
+              label: "With the cash I have from my last allowance.",
+              value: "A",
+            },
+            {
+              label: "By withdrawing from my Savings Account.",
+              value: "B",
+            },
+          ],
+          correctAnswer: "A",
+          explanation:
+            "Your allowance (Pocket Cash) is meant for exactly these small social expenses. Keep your Savings Account untouched!",
+        },
+        {
+          question:
+            "Your Savings Account is your 'Foundation.' If you keep withdrawing small amounts like ₹500, will you ever reach your Age-18 goal?",
+          options: [
+            { label: "Yes, ₹500 doesn't matter.", value: "A" },
+            {
+              label:
+                "No, small leaks sink big ships. Pocket Cash is better here.",
+              value: "B",
+            },
+          ],
+          correctAnswer: "B",
+          explanation:
+            "Small withdrawals add up over time and slow your savings growth. Protect your foundation — use Pocket Cash for small wants.",
+        },
+        {
+          question:
+            "Pocket Cash is like the 'Fruit' of your labor — meant for sharing and small joys. The Savings Account is the 'Root.' Which should you protect?",
+          options: [
+            {
+              label: "Pocket Cash — use it for gifts and small joys.",
+              value: "A",
+            },
+            {
+              label: "Savings Account — break the roots for the gift.",
+              value: "B",
+            },
+          ],
+          correctAnswer: "A",
+          explanation:
+            "Protect your roots! Pocket Cash is the fruit — spend it on gifts and joys. Your Savings Account is the root that keeps your wealth tree alive.",
+        },
+      ],
+    },
   ];
 
   const getFDInterestRate = (termMonths: number) => {
