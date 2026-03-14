@@ -252,7 +252,7 @@ export default function SavingsSimulation() {
   const overallNetWorth = simulation.pocketCash + simulation.savingsBalance;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-800 via-green-700 to-green-900">
+    <div className="min-h-screen bg-green-800 flex flex-col">
       {isEducator ? <EducatorHeader /> : <StudentHeader />}
 
       {/* XP Toast */}
@@ -400,7 +400,7 @@ export default function SavingsSimulation() {
         </div>
       )}
 
-      <div className="flex h-screen">
+      <div className="flex flex-1 min-h-0">
         {/* Left Side Panel */}
         <div className="w-1/3 bg-green-900/50 p-6 text-white">
           {/* Timer */}

@@ -108,40 +108,6 @@ export default function StudentDashboard() {
             >
               Courses
             </Button>
-            <Button
-              sx={{
-                color: "#1c1c1e",
-                fontSize: "0.875rem",
-                fontWeight: 400,
-                px: 2,
-                py: 0.75,
-                borderRadius: "50px",
-                textTransform: "none",
-                "&:hover": {
-                  bgcolor: "rgba(45,106,79,0.08)",
-                  color: "#2d6a4f",
-                },
-              }}
-            >
-              Progress
-            </Button>
-            <Button
-              sx={{
-                color: "#1c1c1e",
-                fontSize: "0.875rem",
-                fontWeight: 400,
-                px: 2,
-                py: 0.75,
-                borderRadius: "50px",
-                textTransform: "none",
-                "&:hover": {
-                  bgcolor: "rgba(45,106,79,0.08)",
-                  color: "#2d6a4f",
-                },
-              }}
-            >
-              Achievements
-            </Button>
           </Box>
 
           {/* User Profile */}

@@ -580,7 +580,7 @@ export default function FixedDepositSimulation() {
   const currentQuestion = currentEmergency?.questions[questionStep] ?? null;
 
   return (
-    <div className="min-h-screen bg-green-800">
+    <div className="min-h-screen bg-green-800 flex flex-col">
       {isEducator ? <EducatorHeader /> : <StudentHeader />}
 
       {/* XP Toast */}
@@ -874,7 +874,7 @@ export default function FixedDepositSimulation() {
       )}
 
       {/* ===== Main Layout ===== */}
-      <div className="flex h-screen">
+      <div className="flex flex-1 min-h-0">
         {/* Left Panel */}
         <div className="w-1/3 bg-green-900/50 p-6 text-white">
           <div className="mb-8">
