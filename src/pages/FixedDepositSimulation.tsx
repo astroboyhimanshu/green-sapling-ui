@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import StudentHeader from "../components/StudentHeader";
 import EducatorHeader from "../components/EducatorHeader";
 import Button from "../components/Button";
@@ -57,6 +58,10 @@ export default function FixedDepositSimulation() {
     null,
   );
   const [showCompletion, setShowCompletion] = useState(false);
+
+  // Track interest earned within the current year
+  const yearlyInterestRef = useRef({ savings: 0, fd: 0 });
+  const toastedYearsRef = useRef(new Set<number>());
 
   const emergencies: Emergency[] = [
     {
@@ -143,12 +148,20 @@ export default function FixedDepositSimulation() {
           const monthlyInterest = prev.savingsBalance * 0.0029;
           const newSavingsBalance = prev.savingsBalance + monthlyInterest;
 
+          // Accumulate yearly interest
+          yearlyInterestRef.current.savings += monthlyInterest;
+
           // Add monthly allowance to pocket cash
           const newPocketCash = prev.pocketCash + 500;
 
-          // Update Fixed Deposits
+          // Update Fixed Deposits and track FD interest accrued this month
           const updatedFDs = prev.fixedDeposits.map((fd) => {
             const newRemainingMonths = Math.max(0, fd.remainingMonths - 1);
+            // Accrue monthly FD interest (simple approximation)
+            if (!fd.isMatured && newRemainingMonths > 0) {
+              yearlyInterestRef.current.fd +=
+                fd.amount * (fd.interestRate / 100 / 12);
+            }
             return {
               ...fd,
               remainingMonths: newRemainingMonths,
@@ -177,6 +190,28 @@ export default function FixedDepositSimulation() {
             newTotalMonthsElapsed % 12 === 0 &&
             !showEmergency
           ) {
+            const year = newTotalMonthsElapsed / 12;
+            // Only toast once per year (guard against StrictMode double-invoke)
+            if (!toastedYearsRef.current.has(year)) {
+              toastedYearsRef.current.add(year);
+              const { savings, fd } = yearlyInterestRef.current;
+              const totalInterest = savings + fd;
+              const parts = [];
+              if (savings > 0)
+                parts.push(
+                  `Savings: ₹${savings.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`,
+                );
+              if (fd > 0)
+                parts.push(
+                  `FD: ₹${fd.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`,
+                );
+              toast.success(
+                `📈 Year ${year} complete! Interest earned — ${parts.length ? parts.join(" • ") : "₹0"} (Total: ₹${totalInterest.toLocaleString("en-IN", { maximumFractionDigits: 0 })})`,
+                { icon: false },
+              );
+              yearlyInterestRef.current = { savings: 0, fd: 0 };
+            }
+
             const randomEmergency =
               emergencies[Math.floor(Math.random() * emergencies.length)];
             setCurrentEmergency(randomEmergency);
@@ -408,7 +443,7 @@ export default function FixedDepositSimulation() {
         </div>
       )}
 
-      <div className="flex h-screen pt-16">
+      <div className="flex h-screen">
         {/* Left Side Panel */}
         <div className="w-1/3 bg-green-900/50 p-6 text-white">
           {/* Timer */}
@@ -432,7 +467,7 @@ export default function FixedDepositSimulation() {
             <div className="w-48 h-48 bg-yellow-100 rounded-full flex items-center justify-center ">
               {/* Piggy Bank SVG placeholder - replace with actual SVG */}
               <div className="animate-bounce [animation-duration:3s] [animation-iteration-count:2]">
-                <img src="/src/assets/piggy_logo.png" alt="" />
+                <img src="/piggy_logo.png" alt="" />
               </div>
             </div>
           </div>
@@ -461,6 +496,22 @@ export default function FixedDepositSimulation() {
               className={`w-full ${isRunning ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}
             >
               {isRunning ? "⏸️ Pause Time" : "▶️ Start Time"}
+            </Button>
+
+            <Button
+              onClick={() => {
+                setIsRunning(false);
+                setSimulation((prev) => ({
+                  ...prev,
+                  yearsLeft: 0,
+                  monthsLeft: 0,
+                  totalMonthsElapsed: 60,
+                }));
+                setShowCompletion(true);
+              }}
+              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white"
+            >
+              ⏭️ Skip to End
             </Button>
 
             <Button
@@ -540,7 +591,6 @@ export default function FixedDepositSimulation() {
           {/* Fixed Deposit - Bottom 50% */}
           <div className="flex-1 bg-white rounded-3xl shadow-2xl p-6 border-4 border-orange-200">
             <div className="text-center mb-6">
-              <div className="text-4xl mb-2">📜</div>
               <h2 className="text-2xl font-bold text-gray-800 mb-1">
                 FIXED DEPOSIT
               </h2>
@@ -574,7 +624,7 @@ export default function FixedDepositSimulation() {
                           <div className="text-xs font-semibold text-gray-800">
                             {formatCurrency(fd.amount)}
                           </div>
-                          <div className="text-xs text-gray-600">
+                          <div className="text-xs text-gray-600 p-1">
                             {fd.interestRate}% • {fd.termMonths}m
                           </div>
                           {fd.isMatured ? (

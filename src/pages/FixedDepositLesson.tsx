@@ -40,7 +40,7 @@ export default function FixedDepositLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-orange-500 to-red-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">📜</span>
               </div>
-              <h1 className="text-5xl font-bold text-gray-800 mb-4">
+              <h1 className="text-5xl font-bold text-gray-800 mb-4 text-center">
                 Fixed Deposit (FD)
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -59,7 +59,7 @@ export default function FixedDepositLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">🔒</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 How Fixed Deposits Work
               </h2>
             </div>
@@ -101,7 +101,7 @@ export default function FixedDepositLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-green-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">⚖️</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 FD vs Savings Account
               </h2>
             </div>
@@ -167,54 +167,48 @@ export default function FixedDepositLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">🎯</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 Smart Strategy
               </h2>
             </div>
 
-            <div className="space-y-6 max-w-4xl mx-auto">
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-purple-100">
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center shrink-0">
-                    <span className="text-3xl">🧠</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                      Use Both!
-                    </h3>
-                    <p className="text-gray-600">
-                      Keep some money in savings for emergencies and put extra
-                      money in FDs for better growth
-                    </p>
-                  </div>
+            <div className="flex gap-6 max-w-4xl mx-auto">
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-xl border border-purple-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">🧠</span>
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Use Both!
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Keep some money in savings for emergencies and put extra money
+                  in FDs for better growth
+                </p>
               </div>
 
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-orange-100">
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center shrink-0">
-                    <span className="text-3xl">📅</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                      Choose Wisely
-                    </h3>
-                    <p className="text-gray-600">
-                      Longer FDs = Higher interest, but your money is locked
-                      longer. Think about when you might need it!
-                    </p>
-                  </div>
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-xl border border-orange-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">📅</span>
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Choose Wisely
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Longer FDs = Higher interest, but your money is locked longer.
+                  Think about when you might need it!
+                </p>
               </div>
 
-              <div className="bg-linear-to-r from-green-100 to-blue-100 rounded-3xl p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              <div className="flex-1 bg-linear-to-br from-green-100 to-blue-100 rounded-3xl p-8 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-white/60 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">🚀</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
                   Ready to Try Both?
                 </h3>
-                <p className="text-gray-600 text-lg">
-                  In the next simulation, you'll manage both a Savings Account
-                  and Fixed Deposits. Learn to balance accessibility with
-                  growth!
+                <p className="text-gray-600 text-sm">
+                  In the next simulation, manage both a Savings Account and
+                  Fixed Deposits. Balance accessibility with growth!
                 </p>
               </div>
             </div>
@@ -227,7 +221,7 @@ export default function FixedDepositLesson() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-orange-50 via-red-50 to-purple-50">
+    <div className="min-h-screen bg-linear-to-br from-orange-50 via-red-50 to-purple-50 flex flex-col">
       {isEducator ? <EducatorHeader /> : <StudentHeader />}
 
       {/* Pause Indicator */}
@@ -243,8 +237,8 @@ export default function FixedDepositLesson() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
-        {/* Progress Indicators */}
+      <div className="flex-1 flex flex-col container mx-auto px-4 py-12">
+        {/* Progress dots */}
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-full p-4 shadow-lg border border-gray-100">
             <div className="flex space-x-3">
@@ -264,17 +258,17 @@ export default function FixedDepositLesson() {
           </div>
         </div>
 
-        {/* Slide Content */}
-        <div className="max-w-6xl mx-auto min-h-[500px] flex items-center">
+        {/* Slide content */}
+        <div className="flex-1 max-w-6xl mx-auto w-full flex items-center justify-center">
           {renderSlide()}
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-16 max-w-6xl mx-auto">
+        {/* Navigation — pinned at bottom, same position every slide */}
+        <div className="flex justify-between items-center mt-12 max-w-6xl mx-auto w-full">
           <button
             onClick={handlePrevious}
             disabled={currentSlide === 1}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 font-medium transition-colors bg-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 font-medium transition-colors bg-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <span>←</span>
             <span>Previous</span>

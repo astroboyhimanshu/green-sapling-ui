@@ -35,10 +35,10 @@ export default function SavingsAccountLesson() {
         return (
           <div className="mx-auto">
             <div className="mb-8">
-              <div className="w-32 h-32 bg-linear-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+              <div className="w-32 h-32 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">🏛️</span>
               </div>
-              <h1 className="text-5xl font-bold text-gray-800 mb-4">
+              <h1 className="text-5xl font-bold text-gray-800 mb-4 text-center">
                 Savings Account
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -56,7 +56,7 @@ export default function SavingsAccountLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">💰</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 Why Use a Savings Account?
               </h2>
             </div>
@@ -98,7 +98,7 @@ export default function SavingsAccountLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">🎯</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 Perfect for Emergency Fund
               </h2>
             </div>
@@ -143,58 +143,46 @@ export default function SavingsAccountLesson() {
               <div className="w-32 h-32 bg-linear-to-br from-yellow-500 to-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
                 <span className="text-6xl">⚡</span>
               </div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6 text-center">
                 Key Features
               </h2>
             </div>
 
-            <div className="space-y-6 max-w-4xl mx-auto">
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-yellow-100">
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center shrink-0">
-                    <span className="text-3xl">💳</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                      Easy Access
-                    </h3>
-                    <p className="text-gray-600">
-                      You can withdraw your money anytime you need it
-                    </p>
-                  </div>
+            <div className="flex gap-6 max-w-4xl mx-auto">
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-xl border border-yellow-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">💳</span>
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Easy Access
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  You can withdraw your money anytime you need it
+                </p>
               </div>
 
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-green-100">
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center shrink-0">
-                    <span className="text-3xl">📊</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                      Low Interest Rate
-                    </h3>
-                    <p className="text-gray-600">
-                      Usually 2-4% per year - safe but modest returns
-                    </p>
-                  </div>
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-xl border border-green-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">📊</span>
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Low Interest Rate
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Usually 2-4% per year — safe but modest returns
+                </p>
               </div>
 
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-blue-100">
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center shrink-0">
-                    <span className="text-3xl">🛡️</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                      FDIC Insured
-                    </h3>
-                    <p className="text-gray-600">
-                      Your money is protected up to ₹5,00,000 by the government
-                    </p>
-                  </div>
+              <div className="flex-1 bg-white rounded-3xl p-8 shadow-xl border border-blue-100 flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-4">
+                  <span className="text-3xl">🛡️</span>
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  DICGC Insured
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Your money is protected up to ₹5,00,000 by the government
+                </p>
               </div>
             </div>
           </div>
@@ -206,7 +194,7 @@ export default function SavingsAccountLesson() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="min-h-screen bg-linear-to-br from-green-50 via-blue-50 to-purple-50 flex flex-col">
       {isEducator ? <EducatorHeader /> : <StudentHeader />}
 
       {/* Pause Indicator */}
@@ -222,8 +210,8 @@ export default function SavingsAccountLesson() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
-        {/* Progress Indicators */}
+      <div className="flex-1 flex flex-col container mx-auto px-4 py-12">
+        {/* Progress dots */}
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-full p-4 shadow-lg border border-gray-100">
             <div className="flex space-x-3">
@@ -243,17 +231,17 @@ export default function SavingsAccountLesson() {
           </div>
         </div>
 
-        {/* Slide Content */}
-        <div className="max-w-6xl mx-auto min-h-[500px] flex items-center">
+        {/* Slide content — grows to fill space, keeping nav pinned below */}
+        <div className="flex-1 max-w-6xl mx-auto w-full flex items-center justify-center">
           {renderSlide()}
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-16 max-w-6xl mx-auto">
+        {/* Navigation — always at the bottom, same position every slide */}
+        <div className="flex justify-between items-center mt-12 max-w-6xl mx-auto w-full">
           <button
             onClick={handlePrevious}
             disabled={currentSlide === 1}
-            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 font-medium transition-colors bg-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 font-medium transition-colors bg-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <span>←</span>
             <span>Previous</span>

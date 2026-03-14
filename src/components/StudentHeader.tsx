@@ -28,15 +28,15 @@ export default function StudentHeader({
             <nav className="flex space-x-6">
               <button
                 onClick={() => navigate("/")}
-                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-lg hover:bg-green-50"
+                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-2xl hover:bg-green-50"
               >
-                🏠 Home
+                Home
               </button>
               <button
-                onClick={() => navigate("/student")}
-                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-lg hover:bg-green-50"
+                onClick={() => navigate("/student/dashboard")}
+                className="text-gray-700 hover:text-green-700 font-medium transition-colors cursor-pointer px-3 py-2 rounded-2xl hover:bg-green-50"
               >
-                📚 Courses
+                Courses
               </button>
             </nav>
           </div>

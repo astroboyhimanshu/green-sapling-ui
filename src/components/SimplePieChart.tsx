@@ -17,7 +17,7 @@ export default function SimplePieChart({
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="relative" style={{ width: size, height: size }}>
+    <div className="relative mx-auto" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="transform -rotate-90">
         {/* Background circle */}
         <circle
@@ -44,7 +44,7 @@ export default function SimplePieChart({
       </svg>
       {/* Percentage text */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-xs font-bold text-gray-700">
+        <span className="text-[10px] font-bold text-gray-700">
           {Math.round(percentage)}%
         </span>
       </div>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import StudentHeader from "../components/StudentHeader";
 import EducatorHeader from "../components/EducatorHeader";
 import Button from "../components/Button";
@@ -42,6 +43,10 @@ export default function SavingsSimulation() {
     null,
   );
   const [showCompletion, setShowCompletion] = useState(false);
+
+  // Track interest earned within the current year
+  const yearlyInterestRef = useRef(0);
+  const toastedYearsRef = useRef(new Set<number>());
 
   const emergencies: Emergency[] = [
     {
@@ -105,6 +110,9 @@ export default function SavingsSimulation() {
           const monthlyInterest = prev.savingsBalance * 0.0029;
           const newSavingsBalance = prev.savingsBalance + monthlyInterest;
 
+          // Accumulate yearly interest
+          yearlyInterestRef.current += monthlyInterest;
+
           // Add monthly allowance to pocket cash
           const newPocketCash = prev.pocketCash + 500;
 
@@ -128,11 +136,23 @@ export default function SavingsSimulation() {
             newTotalMonthsElapsed % 12 === 0 &&
             !showEmergency
           ) {
+            const year = newTotalMonthsElapsed / 12;
+            // Only toast once per year (guard against StrictMode double-invoke)
+            if (!toastedYearsRef.current.has(year)) {
+              toastedYearsRef.current.add(year);
+              const earned = yearlyInterestRef.current;
+              toast.success(
+                `📈 Year ${year} complete! You earned ₹${earned.toLocaleString("en-IN", { maximumFractionDigits: 0 })} in savings interest this year!`,
+                { icon: false },
+              );
+              yearlyInterestRef.current = 0;
+            }
+
             const randomEmergency =
               emergencies[Math.floor(Math.random() * emergencies.length)];
             setCurrentEmergency(randomEmergency);
             setShowEmergency(true);
-            setIsRunning(false); // Pause simulation during emergency
+            setIsRunning(false);
           }
 
           return {
@@ -335,9 +355,9 @@ export default function SavingsSimulation() {
               <div className="space-y-3">
                 <Button
                   onClick={() =>
-                    navigate(
-                      `${basePath}/course/financial-foundations/lesson/2`,
-                    )
+                    navigate(`${basePath}/course/financial-foundations`, {
+                      state: { completedLevel: 1 },
+                    })
                   }
                   className="w-full bg-green-600 hover:bg-green-700 text-lg py-4"
                 >
@@ -382,7 +402,7 @@ export default function SavingsSimulation() {
             <div className="w-48 h-48 bg-yellow-100 rounded-full flex items-center justify-center ">
               {/* Piggy Bank SVG placeholder - replace with actual SVG */}
               <div className="animate-bounce [animation-duration:3s] [animation-iteration-count:2]">
-                <img src="/src/assets/piggy_logo.png" alt="" />
+                <img src="/piggy_logo.png" alt="" />
               </div>
             </div>
           </div>
@@ -413,6 +433,22 @@ export default function SavingsSimulation() {
               className={`w-full ${isRunning ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}
             >
               {isRunning ? "⏸️ Pause Time" : "▶️ Start Time"}
+            </Button>
+
+            <Button
+              onClick={() => {
+                setIsRunning(false);
+                setSimulation((prev) => ({
+                  ...prev,
+                  yearsLeft: 0,
+                  monthsLeft: 0,
+                  totalMonthsElapsed: 60,
+                }));
+                setShowCompletion(true);
+              }}
+              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white"
+            >
+              ⏭️ Skip to End
             </Button>
 
             <Button
